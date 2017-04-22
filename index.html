@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app='todoApp'>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link href="style.css" rel="stylesheet">
+	<title> AngularJS Todo </title>
+</head>
+
+<body ng-app='todoApp' ng-controller="todoController">
+	<div class="container">
+		<div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+			<h1 class="text-center">AngularJS Todo List</h1>
+			<div class="addForm">
+				<form ng-submit="add()">
+					<div class="row">
+						<div class="col-xs-10 col-xs-offset-1">
+							<input type="text" placeholder="Enter a task" ng-model="taskName" class="form-control" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-7 col-xs-offset-1">
+							<input type="date" placeholder="Date due" ng-model="dueDate" class="form-control datepicker" required>
+						</div>
+						<div class="col-xs-3">
+							<button type="submit" class="btn btn-primary">Add  <i class="glyphicon glyphicon-plus"></i></button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div ng-repeat="task in tasks | filter: {complete:false} track by task.id" class="list-group taskList slide">
+				<div class="list-group-item">
+					<i ng-click="completed()" class="fa fa-circle-o checkboxes"></i>
+					<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="taskName">{{task.name}}</p>
+					<button ng-click="delete(task)" class=" deleteBtn"><i class="glyphicon glyphicon-remove" ></i></button>
+					<button ng-click="editing = true" ng-hide="editing" class="editBtn"><i class="glyphicon glyphicon-edit"></i></button>
+					<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="dueDate"> Due Date: {{task.date | date}}</p>
+					<form ng-show="editing" ng-submit="editing =false" class="editForm">
+						<input type="text" ng-model="task.name" class="taskEdit taskName" required>
+						<button type="submit" class="updateBtn" ng-click="update()"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+						<input type="date" ng-model="task.date" class="dateEdit">
+					</form>
+				</div>
+			</div>
+
+			<div ng-repeat="task in tasks | filter: {complete:true} track by task.id" class="completed list-group  slide">
+				<div class="list-group-item">
+					<i ng-click="uncomplete()" class="fa fa-check-circle-o checkboxes"></i>
+					<p class="taskName"> {{task.name}} </p>
+					<button ng-click="delete(task)" class=" deleteBtn"><i class="glyphicon glyphicon-remove"></i></button>
+					<p class="dueDate"> Due Date: {{task.date | date}}</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-animate.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
+	<script src="todo.js"></script>
+</body>
+
+</html>
