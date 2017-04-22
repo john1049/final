@@ -25,22 +25,27 @@
 						</div>
 						<div class="col-xs-3">
 							<select name="priority" ng-model="priority" class="form-control">
-									<option data-valuevalue="high">High</option>
+									<option value="high">High</option>
 									<option value="medium">Medium</option>
 									<option value="low">Low</option>
 							</select>
 						</div>
+						<div class="row">
+						<div class="col-xs-10">
+							<input type="text" placeholder="Category Name" ng-model="category" class="form-control">
+						</div>
+					</div>
 						<div class="col-xs-3">
 							<button type="submit" class="btn btn-primary">Add  <i class="glyphicon glyphicon-plus"></i></button>
 						</div>
 				</form>
 			</div>
 </div>
-
-			<div ng-repeat="(key, value) in tasks | groupBy: 'priority' " class="list-group taskList slide">
-				{{key}}
-				<div ng-repeat="task in value | filter: {complete:false} " class="list-group taskList slide">
-				<div class="list-group-item">
+</div>
+			<div ng-repeat="(category, value) in tasks | groupBy: 'category' " class="list-group taskList slide">
+				{{category}}
+				<div ng-repeat="task in value | filter: {complete:false} track by task.id" class="list-group taskList slide" ng-class="{'high': task.priority === 'high', 'medium': task.priority === 'medium', 'low': task.priority === 'low'}">
+				<div class="list-group-item" ng-class="{'high': task.priority === 'high', 'medium': task.priority === 'medium', 'low': task.priority === 'low'}">
 					<i ng-click="completed()" class="fa fa-circle-o checkboxes"></i>
 					<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="taskName">{{task.name}}</p>
 					<button ng-click="delete(task)" class=" deleteBtn"><i class="glyphicon glyphicon-remove" ></i></button>
@@ -53,6 +58,8 @@
 					</form>
 				</div>
 			</div>
+		</div>
+
 			<div> Completed </div>
 			<div ng-repeat="task in tasks | filter: {complete:true} track by task.id" class="completed list-group  slide">
 				<div class="list-group-item">

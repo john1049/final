@@ -21,6 +21,7 @@
                 name: $scope.taskName,
                 date: $scope.dueDate,
                 priority: $scope.priority,
+                category: $scope.category,
                 complete: false
             })
             $scope.todo.id = cuid();
