@@ -1,8 +1,10 @@
 (function() {
-    var app = angular.module('todoApp', ['ngAnimate'])
+    var app = angular.module('todoApp', ['ngAnimate', 'angular.filter'])
     app.controller('todoController', function($scope) {
         $scope.tasks = (localStorage.getItem('todo') != null) ? JSON.parse(localStorage.getItem('todo')) : [];
         $scope.visible = false;
+
+        console.log($scope.tasks);
 
         $scope.update = function() {
             localStorage.setItem('todo', JSON.stringify($scope.tasks));
@@ -14,9 +16,11 @@
         };
 
         $scope.add = function() {
+              console.log($scope.priority);
             $scope.todo = ({
                 name: $scope.taskName,
                 date: $scope.dueDate,
+                priority: $scope.priority,
                 complete: false
             })
             $scope.todo.id = cuid();
