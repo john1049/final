@@ -4,16 +4,16 @@
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-	<link href="style.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 	<title> AngularJS Todo </title>
 </head>
 
-<body ng-app='todoApp' ng-controller="todoController">
+<body ng-app='todoApp' ng-controller="TodoCtrl">
 	<div class="container">
 		<div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
 			<h1 class="text-center">AngularJS Todo List</h1>
 			<div class="addForm">
-				<form ng-submit="add()">
+				<form ng-submit="addTodo()">
 					<div class="row">
 						<div class="col-xs-10 col-xs-offset-1">
 							<input type="text" placeholder="Enter a task" ng-model="taskName" class="form-control" required>
@@ -21,7 +21,7 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-7 col-xs-offset-1">
-							<input type="date" placeholder="Date due" ng-model="dueDate" class="form-control datepicker" required>
+							<input type="text" placeholder="Date due" ng-model="dueDate" class="form-control datepicker" required>
 						</div>
 						<div class="col-xs-3">
 							<select name="priority" ng-model="priority" class="form-control">
@@ -57,7 +57,7 @@
 					<form ng-show="editing" ng-submit="editing =false" class="editForm">
 						<input type="text" ng-model="task.name" class="taskEdit taskName" required>
 						<button type="submit" class="updateBtn" ng-click="update()"><i class="glyphicon glyphicon-floppy-disk"></i></button>
-						<input type="date" ng-model="task.date" class="dateEdit">
+						<input type="text" ng-model="task.date" class="dateEdit">
 					</form>
 				</div>
 			</div>
@@ -76,11 +76,15 @@
 		</div>
 	</div>
 </div>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-animate.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.js"></script>
-	<script src="todo.js"></script>
+	<!-- Load Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+	<!-- Load AngularFire -->
+	<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+	<script src="js/todo.js"></script>
 </body>
 
 </html>
