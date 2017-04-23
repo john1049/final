@@ -31,21 +31,24 @@
 							</select>
 						</div>
 						<div class="row">
-						<div class="col-xs-10">
+						<div class="col-xs-9">
 							<input type="text" placeholder="Category Name" ng-model="category" class="form-control">
 						</div>
-					</div>
 						<div class="col-xs-3">
 							<button type="submit" class="btn btn-primary">Add  <i class="glyphicon glyphicon-plus"></i></button>
 						</div>
+					</div>
 				</form>
 			</div>
+	</div>
 </div>
 </div>
+<div class="container">
+	<div class="col-xs-10 col-xs-offset-1">
 			<div ng-repeat="(category, value) in tasks | groupBy: 'category' " class="list-group taskList slide">
 				{{category}}
 				<div ng-repeat="task in value | filter: {complete:false} track by task.id" class="list-group taskList slide" ng-class="{'high': task.priority === 'high', 'medium': task.priority === 'medium', 'low': task.priority === 'low'}">
-				<div class="list-group-item" ng-class="{'high': task.priority === 'high', 'medium': task.priority === 'medium', 'low': task.priority === 'low'}">
+				<div class="list-group-item">
 					<i ng-click="completed()" class="fa fa-circle-o checkboxes"></i>
 					<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="taskName">{{task.name}}</p>
 					<button ng-click="delete(task)" class=" deleteBtn"><i class="glyphicon glyphicon-remove" ></i></button>
@@ -69,10 +72,10 @@
 					<p class="dueDate"> Due Date: {{task.date | date}}</p>
 				</div>
 			</div>
-
+</div>
 		</div>
 	</div>
-
+</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-animate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
