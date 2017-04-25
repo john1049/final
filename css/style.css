@@ -2,122 +2,75 @@ h1 {
     padding: 20px 0 30px;
 }
 
-.completed {
-    display: block;
-    background-color: #e9ecee;
-    border: 1px solid #adb8c0;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
-    color: #99a1a7;
-    border-radius: 8px;
-}
-
-.high {
-    display: block;
-    background-color: #f09999;
-    border: 2px solid #ff0000;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-}
-
-.medium {
-    display: block;
-    background-color: #f1e9b1;
-    border: 2px solid #d5cf81;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-}
-
-.low {
-    display: block;
-    background-color: #a1f2a7;
-    border: 2px solid #208f0a;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+body {
+    background-color: #cae4db;
 }
 
 p {
     display: inline-block;
     padding-right: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    color: #00303f;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+}
+
+h3 {
+    color: #00303f;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+}
+
+h4 {
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+}
+
+
+/**************************************
+            Add Form
+**************************************/
+
+.addForm {
+    background-color: #7b979b;
+    padding: 20px;
+    border-radius: 2px;
+}
+
+.form-control {
+    margin-top: 10px;
 }
 
 .btn-primary {
     margin-top: 10px;
 }
 
-.editForm {
-    display: inline;
-}
-
-.deleteBtn {
+.addBtn {
+    background-color: #00303f;
     border: none;
-    background: none;
-    float: right;
 }
 
-.glyphicon-remove {
-    color: #c7c5c5;
-}
 
-.glyphicon-remove:hover {
-    color: #414141;
-}
+/**************************************
+            List Items
+**************************************/
 
-.editBtn {
-    border: none;
-    background: none;
-    float: right;
-    padding-right: 20px;
-}
-
-.glyphicon-edit {
-    color: #c7c5c5;
-}
-
-.glyphicon-edit:hover {
-    color: #414141;
-}
-
-.taskEdit, .dateEdit {
-    margin: 0 0 5px;
-}
-
-.updateBtn {
-    border: none;
-    background: none;
-    float: right;
-    margin-right: 12px;
-}
-
-.glyphicon-floppy-disk {
-    color: #c7c5c5;
-}
-
-.glyphicon-floppy-disk:hover {
-    color: #414141;
-}
-
-.removeBtn {
-    border: none;
-    background: none;
-    color: #c7c5c5;
-}
-
-.removeBtn:hover {
-    color: #414141;
-}
-
-.datepicker {
-    margin-top: 10px !important;
-}
-
-.addForm {
-    background-color: #d6d6d6;
-    padding: 20px;
-    border-radius: 2px;
+.taskList .glyphicon {
+    font-size: 20px;
 }
 
 .list-group {
     margin: 5px;
+    border-bottom: 3px solid #afadad;
+}
+
+.list-group:last-of-type {
+    border-bottom: none;
 }
 
 .list-group-item {
@@ -154,8 +107,117 @@ p {
     cursor: pointer;
 }
 
-.form-control {
-    margin-top: 10px;
+.editForm {
+    display: inline;
+}
+
+.deleteBtn {
+    border: none;
+    background: none;
+    float: right;
+}
+
+.removeBtn {
+    border: none;
+    background: none;
+    color: #c7c5c5;
+}
+
+.removeBtn:hover {
+    color: #414141;
+}
+
+
+/**************************************
+            Edit Form
+**************************************/
+
+.editBtn {
+    border: none;
+    background: none;
+    float: right;
+    padding-right: 20px;
+}
+
+.taskEdit, .dateEdit {
+    margin: 0 0 5px;
+}
+
+.updateBtn {
+    border: none;
+    background: none;
+    float: right;
+    margin-right: 12px;
+}
+
+
+/**************************************
+            Task States
+**************************************/
+
+.completed {
+    display: block;
+    background-color: #e9ecee;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    color: #99a1a7;
+    border-radius: 10px;
+}
+
+.completed .glyphicon:hover {
+    color: #202020;
+}
+
+
+.high {
+    display: block;
+    background-color: #ffe6e6;
+    border: 2px solid #892303;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #2d0202;
+}
+
+.high .glyphicon {
+    color: #892303;
+}
+
+.high .glyphicon:hover {
+    color: #2d0202;
+}
+
+.medium {
+    display: block;
+    background-color: #fffee1;
+    border: 2px solid #c99502;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #2d2801;
+}
+
+.medium .glyphicon {
+    color: #c99502;
+}
+
+.medium .glyphicon:hover {
+    color: #2d2801;
+}
+
+.low {
+    display: block;
+    background-color: #d2f9d2;
+    border: 2px solid #193a11;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #081e01;
+}
+
+.low .glyphicon {
+    color: #193a11;
+}
+
+.low .glyphicon:hover {
+    color: #081e01;
 }
 
 
@@ -202,9 +264,12 @@ p {
             Media Queries
 **************************************/
 
-@media screen and (min-width: 768px) {
-    .tasklist .glyphicon {
-        font-size: 30px !important;
+@media screen and (max-width: 768px) {
+    .taskList .glyphicon {
+        font-size: 30px;
+    }
+    .taskList i {
+        font-size: 30px;
     }
     .dueDate {
         margin-left: 5px;
