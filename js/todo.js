@@ -36,8 +36,10 @@ angular
         return{
           task_name: '',
           due_date: '',
+          category: '',
           comment: '',
-          priority: ''
+          priority: '',
+          complete: false
         }
       }
 
@@ -45,11 +47,14 @@ angular
 
       this.todos = todos.getAll();
 
+      console.log(this.todos);
+
       this.addTodo = function addTodo(newTodo){
         this.todos
           .$add(newTodo)
           .then(newRef => {
             this.newTodo = this.getNewTodo()
+            console.log(this.todos)
           })
       }
 
@@ -57,7 +62,13 @@ angular
         this.todos.$remove(todo)
       }
 
-      this.save = function save(contact) {
+      this.save = function save(todo) {
+        this.todos.$save(todo)
+      }
+
+      this.complete = function complete(todo){
+        console.log(todo.complete)
+        todo.complete = true
         this.todos.$save(todo)
       }
     }
