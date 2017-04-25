@@ -10,7 +10,7 @@
 
 <body ng-app='todoApp' ng-controller="TodoCtrl as ctrl">
 	<div class="container">
-		<div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+		<div class="col-xs-10 col-xs-offset-1">
 			<h1 class="text-center">AngularJS Todo List</h1>
 			<div class="addForm">
 				<form ng-submit="ctrl.addTodo(ctrl.newTodo)">
@@ -24,11 +24,16 @@
 							<input type="text" placeholder="Date due" ng-model="ctrl.newTodo.due_date" class="form-control" required>
 						</div>
 						<div class="col-xs-3">
-							<select name="priority" ng-model="ctrl.newTodo.priority" class="form-control">
+							<select name="priority" ng-model="ctrl.newTodo.priority" class="form-control" placeholder="Priority">
 									<option value="high">High</option>
 									<option value="medium">Medium</option>
 									<option value="low">Low</option>
 							</select>
+						</div>
+						<div class="row">
+							<div class="col-xs-10 col-xs-offset-1">
+								<textarea placeholder="Comments" ng-model="ctrl.newTodo.notes" class="form-control" rows="5"></textarea>
+							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-9">
@@ -44,38 +49,49 @@
 		</div>
 	</div>
 
-<!--
-<div ng-repeat="todo in ctrl.todos track by todo.$id">
-	{{todo.task_name}}
-	{{todo.due_date}}
-	<div ng-model="todos.task_name">
-</div>
--->
-
 	<div class="container">
 		<div class="col-xs-10 col-xs-offset-1">
-			<div ng-repeat="(category, name) in ctrl.todos | groupBy: 'category' " class="list-group taskList slide">
-				{{category}}
-				<div ng-repeat="todo in name | filter: {complete:false} track by todo.$id" class="list-group taskList slide" ng-class="{'high': todo.priority === 'high', 'medium': todo.priority === 'medium', 'low': todo.priority === 'low'}">
+			<div ng-repeat="(name, category) in ctrl.todos | groupBy: 'category' " class="list-group taskList slide">
+				<h3>{{name}}</h3>
+				<div ng-repeat="todo in category | filter: {complete:false} track by todo.$id" class="list-group taskList slide" ng-class="{'high': todo.priority === 'high', 'medium': todo.priority === 'medium', 'low': todo.priority === 'low'}">
 					<div class="list-group-item">
 						<i ng-click="ctrl.complete(todo)" class="fa fa-circle-o checkboxes"></i>
 						<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="taskName">{{todo.task_name}}</p>
-						<button ng-click="remove(todo)" class=" deleteBtn"><i class="glyphicon glyphicon-remove" ></i></button>
+						<button ng-click="ctrl.remove(todo)" class=" deleteBtn"><i class="glyphicon glyphicon-remove" ></i></button>
 						<button ng-click="editing = true" ng-hide="editing" class="editBtn"><i class="glyphicon glyphicon-edit"></i></button>
-						<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="dueDate"> Due Date: {{todo.due_date | date}}</p>
+						<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="dueDate"> Due Date: {{todo.due_date}}</p>
+						<p ng-hide="editing" ng-click="editing = true" ng-hide="editing"> Notes: {{todo.notes}}</p>
 						<form ng-show="editing" ng-submit="editing=false" class="editForm">
-							<input type="text" ng-model="todo.task_name" class="taskEdit taskName" required>
-							<button type="submit" class="updateBtn" ng-click="ctrl.save(todo)"><i class="glyphicon glyphicon-floppy-disk"></i></button>
-							<input type="text" ng-model="todo.due_date" class="dateEdit">
+							<input type="text" ng-model="todo.task_name" class="taskEdit taskName form-control" required>
+							<button type="submit" class="updateBtn form-control" ng-click="ctrl.save(todo)"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+							<input type="text" ng-model="todo.due_date" class="dateEdit form-control">
+							<textarea type="text" ng-model="todo.notes" class="form-control"></textarea>
+							<select name="priority" ng-model="todo.priority" class="form-control" placeholder="Priority">
+									<option value="high">High</option>
+									<option value="medium">Medium</option>
+									<option value="low">Low</option>
+							</select>
 						</form>
+					</div>
+					<!--<button ng-click="ctrl.test(todo)">test </button>-->
+				</div>
+				<div> Completed Tasks in {{name}}</div>
+				<div ng-repeat="todo in category | filter: {complete:true} track by todo.$id" class="completed list-group  slide">
+					<div class="list-group-item">
+						<i ng-click="ctrl.uncomplete(todo)" class="fa fa-check-circle-o checkboxes"></i>
+						<p class="taskName"> {{todo.task_name}} </p>
+						<button ng-click="ctrl.remove(todo)" class=" deleteBtn"><i class="glyphicon glyphicon-remove"></i></button>
+						<p class="dueDate"> Due Date: {{todo.due_date}}</p>
+						<p> Notes: {{todo.notes}}</p>
 					</div>
 				</div>
 			</div>
-
+			</div>
+<!--
 			<div> Completed </div>
-			<div ng-repeat="todo in todos | filter: {complete:true} track by todo.id" class="completed list-group  slide">
+			<div ng-repeat="todo in ctrl.todos | filter: {complete:true} track by todo.$id" class="completed list-group  slide">
 				<div class="list-group-item">
-					<i ng-click="ctrl.save()" class="fa fa-check-circle-o checkboxes"></i>
+					<i ng-click="ctrl.uncomplete(todo)" class="fa fa-check-circle-o checkboxes"></i>
 					<p class="taskName"> {{todo.task_name}} </p>
 					<button ng-click="ctrl.remove(todo)" class=" deleteBtn"><i class="glyphicon glyphicon-remove"></i></button>
 					<p class="dueDate"> Due Date: {{todo.due_date}}</p>
@@ -83,8 +99,8 @@
 			</div>
 		</div>
 	</div>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-animate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.js"></script>
 	<!-- Load Firebase -->

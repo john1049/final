@@ -1,5 +1,5 @@
 angular
-    .module('todoApp', ['firebase', 'angular.filter'])
+    .module('todoApp', ['firebase', 'angular.filter', 'ngAnimate'])
     .constant('firebaseConfig', {
       apiKey: "AIzaSyCGz88kNQ2b-7nU8EGaQHtubdnlisG54hI",
       authDomain: "cloud-based-todo.firebaseapp.com",
@@ -30,14 +30,34 @@ angular
       }
     }
 
+
     function TodoCtrl(todos){
+
+      if (!Array.prototype.filter) {
+        Array.prototype.filter = function(fun /*, thisp*/ ) {
+            var len = this.length;
+            if (typeof fun != "function")
+                throw new TypeError();
+
+            var res = new Array();
+            var thisp = arguments[1];
+            for (var i = 0; i < len; i++) {
+                if (i in this) {
+                    var val = this[i]; // in case fun mutates this
+                    if (fun.call(thisp, val, i, this))
+                        res.push(val);
+                }
+            }
+            return res;
+        };
+    }
 
       this.getNewTodo = function getNewTodo(){
         return{
           task_name: '',
           due_date: '',
           category: '',
-          comment: '',
+          notes: '',
           priority: '',
           complete: false
         }
@@ -67,9 +87,17 @@ angular
       }
 
       this.complete = function complete(todo){
-        console.log(todo.complete)
         todo.complete = true
         this.todos.$save(todo)
+      }
+
+      this.uncomplete = function uncomplete(todo){
+        todo.complete = false
+        this.todos.$save(todo)
+      }
+
+      this.test = function test(todo){
+        todo.category
       }
     }
 
