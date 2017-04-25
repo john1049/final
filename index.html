@@ -2,68 +2,81 @@
 <html ng-app='todoApp'>
 
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap Stylesheet-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Font Awesome Stylesheet-->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<!-- My Stylesheet -->
 	<link href="css/style.css" rel="stylesheet">
 	<title> AngularJS Todo </title>
 </head>
 
 <body ng-app='todoApp' ng-controller="TodoCtrl as ctrl">
 	<div class="container">
-		<div class="col-xs-10 col-xs-offset-1">
+		<div class="col-md-10 col-md-offset-1">
 			<h1 class="text-center">AngularJS Todo List</h1>
+
+			<!-- Add todo form -->
 			<div class="addForm">
 				<form ng-submit="ctrl.addTodo(ctrl.newTodo)">
 					<div class="row">
-						<div class="col-xs-10 col-xs-offset-1">
+						<div class="col-md-10 col-md-offset-1">
 							<input type="text" placeholder="Enter a task" ng-model="ctrl.newTodo.task_name" class="form-control" required>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-7 col-xs-offset-1">
+						<div class="col-md-7 col-md-offset-1">
 							<input type="text" placeholder="Date due" ng-model="ctrl.newTodo.due_date" class="form-control" required>
 						</div>
-						<div class="col-xs-3">
+						<div class="col-md-3">
 							<select name="priority" ng-model="ctrl.newTodo.priority" class="form-control" placeholder="Priority">
 									<option value="high">High</option>
 									<option value="medium">Medium</option>
 									<option value="low">Low</option>
 							</select>
 						</div>
-						<div class="row">
-							<div class="col-xs-10 col-xs-offset-1">
-								<textarea placeholder="Comments" ng-model="ctrl.newTodo.notes" class="form-control" rows="5"></textarea>
-							</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<textarea placeholder="Comments" ng-model="ctrl.newTodo.notes" class="form-control" rows="5"></textarea>
 						</div>
-						<div class="row">
-							<div class="col-xs-9">
-								<input type="text" placeholder="Category Name" ng-model="ctrl.newTodo.category" class="form-control">
-							</div>
-							<div class="col-xs-3">
-								<button type="submit" class="btn btn-primary">Add  <i class="glyphicon glyphicon-plus"></i></button>
-							</div>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<input type="text" placeholder="Category Name" ng-model="ctrl.newTodo.category" class="form-control">
 						</div>
-				</form>
-				</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-5">
+							<button type="submit" class="btn btn-primary">Add Task  <i class="glyphicon glyphicon-plus"></i></button>
+						</div>
+					</div>
 			</div>
+			</form>
 		</div>
 	</div>
 
+
 	<div class="container">
-		<div class="col-xs-10 col-xs-offset-1">
+		<div class="col-xs-12 col-md-10 col-md-offset-1">
 			<div ng-repeat="(name, category) in ctrl.todos | groupBy: 'category' " class="list-group taskList slide">
 				<h3>{{name}}</h3>
 				<div ng-repeat="todo in category | filter: {complete:false} track by todo.$id" class="list-group taskList slide" ng-class="{'high': todo.priority === 'high', 'medium': todo.priority === 'medium', 'low': todo.priority === 'low'}">
 					<div class="list-group-item">
+
+						<!-- Todo list items-->
 						<i ng-click="ctrl.complete(todo)" class="fa fa-circle-o checkboxes"></i>
-						<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="taskName">{{todo.task_name}}</p>
 						<button ng-click="ctrl.remove(todo)" class=" deleteBtn"><i class="glyphicon glyphicon-remove" ></i></button>
 						<button ng-click="editing = true" ng-hide="editing" class="editBtn"><i class="glyphicon glyphicon-edit"></i></button>
+						<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="taskName">{{todo.task_name}}</p>
 						<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="dueDate"> Due Date: {{todo.due_date}}</p>
-						<p ng-hide="editing" ng-click="editing = true" ng-hide="editing"> Notes: {{todo.notes}}</p>
+						<p ng-hide="editing" ng-click="editing = true" ng-hide="editing" class="notes"> Notes: {{todo.notes}}</p>
+
+						<!-- Editing form -->
 						<form ng-show="editing" ng-submit="editing=false" class="editForm">
+							<button type="submit" class="updateBtn" ng-click="ctrl.save(todo)"><i class="glyphicon glyphicon-floppy-disk"></i></button>
 							<input type="text" ng-model="todo.task_name" class="taskEdit taskName form-control" required>
-							<button type="submit" class="updateBtn form-control" ng-click="ctrl.save(todo)"><i class="glyphicon glyphicon-floppy-disk"></i></button>
 							<input type="text" ng-model="todo.due_date" class="dateEdit form-control">
 							<textarea type="text" ng-model="todo.notes" class="form-control"></textarea>
 							<select name="priority" ng-model="todo.priority" class="form-control" placeholder="Priority">
@@ -73,8 +86,9 @@
 							</select>
 						</form>
 					</div>
-					<!--<button ng-click="ctrl.test(todo)">test </button>-->
 				</div>
+
+				<!-- Completed items list -->
 				<div> Completed Tasks in {{name}}</div>
 				<div ng-repeat="todo in category | filter: {complete:true} track by todo.$id" class="completed list-group  slide">
 					<div class="list-group-item">
@@ -86,27 +100,17 @@
 					</div>
 				</div>
 			</div>
-			</div>
-<!--
-			<div> Completed </div>
-			<div ng-repeat="todo in ctrl.todos | filter: {complete:true} track by todo.$id" class="completed list-group  slide">
-				<div class="list-group-item">
-					<i ng-click="ctrl.uncomplete(todo)" class="fa fa-check-circle-o checkboxes"></i>
-					<p class="taskName"> {{todo.task_name}} </p>
-					<button ng-click="ctrl.remove(todo)" class=" deleteBtn"><i class="glyphicon glyphicon-remove"></i></button>
-					<p class="dueDate"> Due Date: {{todo.due_date}}</p>
-				</div>
-			</div>
 		</div>
-	</div>
--->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-animate.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.js"></script>
-	<!-- Load Firebase -->
-	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-	<!-- Load AngularFire -->
-	<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-	<script src="js/todo.js"></script>
+
+		<!-- Load Angular and Dependencies -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-animate.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.js"></script>
+		<!-- Load Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+		<!-- Load AngularFire -->
+		<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+		<!-- Load script file -->
+		<script src="js/todo.js"></script>
 </body>
 </html>

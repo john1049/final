@@ -136,6 +136,12 @@ p{
   font-size: 14px;
 }
 
+.notes{
+  display: block;
+  margin-left: 35px;
+  font-size: 14px;
+}
+
 .task-add {
   transition: all 0.5s ease;
   opacity: 1.0;
@@ -147,6 +153,14 @@ p{
   font-size: 20px;
   cursor: pointer;
 }
+
+.form-control{
+  margin-top: 10px;
+}
+
+/**************************************
+            Animations
+**************************************/
 
 .slide {
   position: relative;
@@ -180,4 +194,21 @@ p{
 
 .slide.ng-move.ng-move-active {
   opacity: 0.0;
+}
+/**************************************
+            Media Queries
+**************************************/
+
+@media screen and (min-width : 768px){
+  .tasklist .glyphicon{
+    font-size: 30px !important;
+  }
+
+  .dueDate{
+    margin-left: 5px;
+  }
+
+  .notes{
+    margin-left: 5px;
+  }
 }
